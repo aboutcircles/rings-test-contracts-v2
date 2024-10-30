@@ -30,9 +30,9 @@ contract Hub is Circles, TypeDefinitions, IHubErrors {
     uint256 private constant WELCOME_BONUS = 200 * EXA;
 
     /**
-     * @dev The cost of an invitation for a new avatar, paid in personal Circles burnt, set to 0 RINGS.
+     * @dev The cost of an invitation for a new avatar, paid in personal Circles burnt, set to 0.1 RINGS.
      */
-    uint256 private constant INVITATION_COST = 1;
+    uint256 private constant INVITATION_COST = 1 * EXA / 10;
 
     /**
      * @dev The address used as the first element of the linked list of avatars.
