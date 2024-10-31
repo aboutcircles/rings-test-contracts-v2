@@ -11,8 +11,8 @@ import "../names/INameRegistry.sol";
 import "./TypeDefinitions.sol";
 
 /**
- * @title Hub v2 contract for Circles
- * @notice The Hub contract is the main contract for the Circles protocol.
+ * @title Hub v2 contract for Rings (test version of Circles)
+ * @notice The Hub contract is the main contract for the Rings(Circles) protocol.
  * It adopts the ERC1155 standard for multi-token contracts and governs
  * the personal and group Circles of people, organizations and groups.
  * Circle balances are demurraged in the Hub contract.
@@ -30,7 +30,7 @@ contract Hub is Circles, TypeDefinitions, IHubErrors {
     uint256 private constant WELCOME_BONUS = 200 * EXA;
 
     /**
-     * @dev The cost of an invitation for a new avatar, paid in personal Circles burnt, set to 0.1 RINGS.
+     * @dev The cost of an invitation for a new avatar, paid in personal Rings burnt, set to 0.1 RINGS.
      */
     uint256 private constant INVITATION_COST = 1 * EXA / 10;
 
@@ -235,17 +235,13 @@ contract Hub is Circles, TypeDefinitions, IHubErrors {
      */
     function registerHuman(address _inviter, bytes32 _metadataDigest) external {
         if (_inviter == address(0)) {
-            // to self-register yourself if you are a stopped v1 user,
-            // leave the inviter address as zero.
+            // anyone can self-register in RINGS (test deployment)
+            // Simply leave the inviter address as zero
 
-            // only available for v1 users with stopped v1 mint, for initial bootstrap period
-            (address v1CirclesStatus, uint256 v1LastTouched) = _registerHuman(msg.sender, _inviter);
-            // check if v1 Circles exists and has been stopped
-            // and if it has been stopped, did it stop before the end of the invitation period?
-            if (v1CirclesStatus != CIRCLES_STOPPED_V1 || v1LastTouched >= invitationOnlyTime) {
-                // revert CirclesHubRegisterAvatarV1MustBeStoppedBeforeEndOfInvitationPeriod(msg.sender, 0);
-                revert CirclesErrorOneAddressArg(msg.sender, 0x60);
-            }
+            _registerHuman(msg.sender, _inviter);
+
+            // always mint the welcome bonus to the newly registered human
+            _mintAndUpdateTotalSupply(msg.sender, toTokenId(msg.sender), WELCOME_BONUS, "", true);
         } else {
             // if someone has invited you by trusting your address ahead of this call,
             // they must themselves be a registered human, and they must pay the invitation cost (after invitation period).
@@ -262,13 +258,11 @@ contract Hub is Circles, TypeDefinitions, IHubErrors {
             // if they have not stopped their v1 contract)
             _registerHuman(msg.sender, _inviter);
 
-            if (block.timestamp > invitationOnlyTime) {
-                // after the invitation period, the inviter must burn the invitation cost
-                _burnAndUpdateTotalSupply(_inviter, toTokenId(_inviter), INVITATION_COST);
+            // after the invitation period, the inviter must burn the invitation cost
+            _burnAndUpdateTotalSupply(_inviter, toTokenId(_inviter), INVITATION_COST);
 
-                // mint the welcome bonus to the newly registered human
-                _mintAndUpdateTotalSupply(msg.sender, toTokenId(msg.sender), WELCOME_BONUS, "", true);
-            }
+            // mint the welcome bonus to the newly registered human
+            _mintAndUpdateTotalSupply(msg.sender, toTokenId(msg.sender), WELCOME_BONUS, "", true);
         }
 
         // store the metadata digest for the avatar metadata

@@ -1,6 +1,6 @@
 {
-    "name": "deploy-circles",
-    "version": "rc-1.0.0-beta",
+    "name": "deploy-rings",
+    "version": "rings-1.0.1-beta",
     "type": "module",
     "dependencies": {
         "dotenv": "^16.4.5",

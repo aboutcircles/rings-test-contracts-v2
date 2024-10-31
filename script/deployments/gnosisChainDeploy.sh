@@ -22,7 +22,7 @@ deploy_and_store_details() {
 --private-key ${PRIVATE_KEY} \
 --optimizer-runs 200 \
 --chain-id 100 \
---priority-gas-price 1200000000 \
+--priority-gas-price 2200000000 \
 --nonce ${nonce_to_use} \
 ${source_path} \
 ${@:5}"
