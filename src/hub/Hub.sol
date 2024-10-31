@@ -220,16 +220,13 @@ contract Hub is Circles, TypeDefinitions, IHubErrors {
     // External functions
 
     /**
-     * @notice Register human allows to register an avatar for a human,
-     * if they have a stopped v1 Circles contract, that has been stopped
-     * before the end of the invitation period.
-     * Otherwise the caller must have been invited by an already registered human avatar.
+     * @notice Register human allows to register an avatar for a human (for RINGS, anyone can always self-register).
+     * Preserving functionality from Circles: Otherwise the caller must have been invited by an already registered human avatar.
      * Humans can invite someone by trusting their address ahead of this call.
      * After the invitation period, the inviter must burn the invitation cost, and the
      * newly registered human will receive the welcome bonus.
      * @param _inviter address of the inviter, who must have trusted the caller ahead of this call.
-     * If the inviter is zero, the caller can self-register if they have a stopped v1 Circles contract
-     * (stopped before the end of the invitation period).
+     * If the inviter is zero, the caller can self-register (always in RINGS)
      * @param _metadataDigest (optional) sha256 metadata digest for the avatar metadata
      * should follow ERC1155 metadata standard.
      */
@@ -244,7 +241,7 @@ contract Hub is Circles, TypeDefinitions, IHubErrors {
             _mintAndUpdateTotalSupply(msg.sender, toTokenId(msg.sender), WELCOME_BONUS, "", true);
         } else {
             // if someone has invited you by trusting your address ahead of this call,
-            // they must themselves be a registered human, and they must pay the invitation cost (after invitation period).
+            // they must themselves be a registered human, and they must pay the invitation cost.
 
             if (!isHuman(_inviter) || !isTrusted(_inviter, msg.sender)) {
                 // revert CirclesHubMustBeHuman(msg.sender, 0);
