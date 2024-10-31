@@ -1,0 +1,24 @@
+Chiado deployment
+=================
+Deployment Date: 2024-10-31 19:01:55
+Version: rings-1.0.1-beta
+Git Commit: 94752cae14143bcb49d95707bd38f9cbadc59227
+Deployer Address: 0x7619F26728Ced663E50E578EB6ff42430931564c, Intitial nonce: 270
+Compiler Version: v0.8.24+commit.e11b9ed9
+
+Deployed Contracts:
+Hub: 0x26A1616dE65Cca533eB9f46867ebB146C4249FE6
+Migration: 0xd42cD9C5927534b7BB7348BfDbCF6D4827635e8d
+NameRegistry: 0x294aB2cE287C955c4e8D089278063F416e4C0eFd
+ERC20Lift: 0x7992092357A3AdF4Cc9a214d9571Aa073DEFA57f
+StandardTreasury: 0x65927b2b1ED4526c1c8Aea38F928D7C760E6dE21
+BaseGroupMintPolicy: 0x25F35BE6424fD6968EFf0E6f22070eEB50Ce9461
+MastercopyDemurrageERC20: 0xb674cD2a057B3786B4Feed0eA44143C9a3D50F4c
+MastercopyInflationaryERC20: 0x9894B115E6b946Ae0BC28916A67D7504aC40b552
+MastercopyStandardVault: 0x74E09176Da39ac779eC09005294536D9207e99FD
+
+Bootstrap End Date: 2024-11-15 23:59:59 UTC
+Current Time: 2024-10-31 19:01:54 UTC
+Bootstrap Period: 1313885 seconds
+Bootstrap End Date (Unix time): 1731715199
+Current Time (Unix time): 1730401314

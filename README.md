@@ -1,4 +1,4 @@
-# Circles Protocol
+# Circles Protocol (Clone for RINGS test deployment)
 
 Circles is a decentralized protocol for creating and distributing fair and social money through personal currencies. Built on the Gnosis Chain, it utilizes smart contracts to manage the creation, distribution, and transfer of personal currencies using the ERC1155 multi-token standard.
 
