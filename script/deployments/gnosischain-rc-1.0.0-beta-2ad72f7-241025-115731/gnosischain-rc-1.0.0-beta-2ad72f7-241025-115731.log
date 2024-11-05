@@ -1,0 +1,24 @@
+Gnosis Chain deployment
+=================
+Deployment Date: 2024-10-25 11:57:31
+Version: rc-1.0.0-beta
+Git Commit: 2ad72f7ed62276bb9f071f50df7d8c1f75334863
+Deployer Address: 0x438285f5ab11e75bF6A2B2368bd67b504d071b96, Initial nonce: 35
+Compiler Version: v0.8.24+commit.e11b9ed9
+
+Deployed Contracts:
+Hub: 0xFDb802c5B3b94a2d79f15b00C9F0101d266e4610
+Migration: 0x6024221A6a67C35997217C103F67D48fD97f700C
+NameRegistry: 0x6b2879C7239d34044665B91C19f3973b8Fa290c7
+ERC20Lift: 0x18A195cED102E276a3Eef3B6c9dF84734Fef0617
+StandardTreasury: 0xb43fa07218f141beccCa5a9e3f730997Be8589c4
+BaseGroupMintPolicy: 0x2fCd0185B30662B4C2bC0729b48d27247f79F1Ec
+MastercopyDemurrageERC20: 0xb47A5E4F4D5a9E960f6f3b4acb0d233EBc960857
+MastercopyInflationaryERC20: 0xB627b3759903b4DE0ADCC4b6D2C5b88E5D9d5f35
+MastercopyStandardVault: 0x83B46118Cc87248D74ADEB9eb96832c48b14702C
+
+Bootstrap End Date: 2024-11-15 23:59:59 UTC
+Current Time: 2024-10-25 09:57:31 UTC
+Bootstrap Period: 1864948 seconds
+Bootstrap End Date (Unix time): 1731715199
+Current Time (Unix time): 1729850251
