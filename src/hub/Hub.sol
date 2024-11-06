@@ -25,6 +25,11 @@ contract Hub is Circles, TypeDefinitions, IHubErrors {
     // Constants
 
     /**
+     * @dev Developer bonus for new avatars invited to Circles. Set to 19200 RINGS to allow developer invite 200 avatars.
+     */
+    uint256 private constant DEVELOPER_BONUS = 19_200 * EXA;
+
+    /**
      * @dev Welcome bonus for new avatars invited to Circles. Set to 48 RINGS.
      */
     uint256 private constant WELCOME_BONUS = 48 * EXA;
@@ -65,6 +70,11 @@ contract Hub is Circles, TypeDefinitions, IHubErrors {
      * @notice The address of the Lift ERC20 contract.
      */
     IERC20Lift internal liftERC20;
+
+    /**
+     * @notice The address of the faucet contract for developer registration.
+     */
+    address internal faucet;
 
     /**
      * @notice The timestamp of the start of the invitation-only period.
@@ -182,6 +192,7 @@ contract Hub is Circles, TypeDefinitions, IHubErrors {
         address _migration,
         IERC20Lift _liftERC20,
         address _standardTreasury,
+        address _faucet,
         uint256 _inflationDayZero,
         uint256 _bootstrapTime,
         string memory _gatewayUrl
@@ -210,6 +221,9 @@ contract Hub is Circles, TypeDefinitions, IHubErrors {
         // store the lift ERC20 contract address
         liftERC20 = _liftERC20;
 
+        // store the faucet contract address
+        faucet = _faucet;
+
         // store the standard treasury contract address for registerGroup()
         standardTreasury = _standardTreasury;
 
@@ -218,6 +232,28 @@ contract Hub is Circles, TypeDefinitions, IHubErrors {
     }
 
     // External functions
+
+    /**
+     * @notice Register developer allows faucet contract to register an avatar
+     * for a developer. Developer will receive the developer bonus.
+     * @param _developer address of the developer to register.
+     * @param _metadataDigest (optional) sha256 metadata digest for the avatar metadata
+     * should follow ERC1155 metadata standard.
+     */
+    function registerDeveloper(address _developer, bytes32 _metadataDigest) external {
+        if (msg.sender != faucet) revert CirclesErrorOneAddressArg(msg.sender, 0xE0);
+
+        // register developer as a human
+        _registerHuman(_developer, faucet);
+
+        // mint the developer bonus to the newly registered developer
+        _mintAndUpdateTotalSupply(_developer, toTokenId(_developer), DEVELOPER_BONUS, "", true);
+
+        // store the metadata digest for the avatar metadata
+        if (_metadataDigest != bytes32(0)) {
+            nameRegistry.setMetadataDigest(msg.sender, _metadataDigest);
+        }
+    }
 
     /**
      * @notice Register human allows to register an avatar for a human,

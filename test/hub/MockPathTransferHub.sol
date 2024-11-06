@@ -16,6 +16,7 @@ contract MockPathTransferHub is Hub {
             address(0),
             IERC20Lift(address(0)),
             address(1),
+            address(1),
             _inflationDayZero,
             _bootstrapTime,
             ""

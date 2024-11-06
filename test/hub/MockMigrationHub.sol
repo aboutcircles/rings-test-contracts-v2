@@ -15,6 +15,7 @@ contract MockMigrationHub is Hub {
             _migration,
             IERC20Lift(address(0)),
             address(1),
+            address(1),
             _inflationDayZero,
             _bootstrapTime,
             ""

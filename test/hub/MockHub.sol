@@ -13,6 +13,7 @@ contract MockHub is Hub {
             address(1),
             IERC20Lift(address(1)),
             address(1),
+            address(1),
             _inflationDayZero,
             _bootstrapTime,
             ""
