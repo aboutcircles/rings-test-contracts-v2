@@ -12,6 +12,7 @@ interface IHubV2 is IERC1155, ICircles {
     function isOrganization(address avatar) external view returns (bool);
 
     function migrate(address owner, address[] calldata avatars, uint256[] calldata amounts) external;
+    function registerDeveloper(address developer, bytes32 metadataDigest) external;
     function mintPolicies(address avatar) external view returns (address);
     function burn(uint256 id, uint256 amount, bytes calldata data) external;
 
