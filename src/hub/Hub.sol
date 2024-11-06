@@ -241,6 +241,7 @@ contract Hub is Circles, TypeDefinitions, IHubErrors {
      * should follow ERC1155 metadata standard.
      */
     function registerDeveloper(address _developer, bytes32 _metadataDigest) external {
+        // only faucet is allowed to call this function
         if (msg.sender != faucet) revert CirclesErrorOneAddressArg(msg.sender, 0xE0);
 
         // register developer as a human
